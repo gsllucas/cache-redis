@@ -1,0 +1,25 @@
+{
+  "name": "redis",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsup src",
+    "start": "tsx watch src"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "redis": "^4.6.13",
+    "tsup": "^8.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.2",
+    "tsx": "^4.7.1",
+    "typescript": "^5.4.3"
+  }
+}

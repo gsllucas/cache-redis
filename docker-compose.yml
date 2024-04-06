@@ -1,0 +1,11 @@
+version: '3.5'
+
+services:
+  redis:
+    container_name: redis_container
+    ports:
+      - 6379:6379
+    build:
+      dockerfile: Dockerfile
+    environment:
+      - REDISCLI_AUTH=$REDISCLI_AUTH
