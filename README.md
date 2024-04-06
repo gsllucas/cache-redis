@@ -14,19 +14,25 @@ By default, redis is set up with some default credentials, so when app is live f
 
 ## Getting Started
 
-> Use node version > v16.x
-
 1. Install dependencies
 
-`npm install`
+```
+npm install
+```
 
 2. Run redis with docker
 
-`docker compose up -d --build`
+> You can connect to redis with a different instance instead of running a docker, just be sure to let it running in redis://localhost:6379
+
+```
+docker compose up -d --build
+```
 
 3. Run application
 
-`npm run start`
+```
+npm run start
+```
 
 ## Useful links
 
