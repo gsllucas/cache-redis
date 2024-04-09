@@ -1,35 +1,20 @@
 import { config } from 'dotenv';
-import { randomUUID } from 'crypto';
-import { CacheClient } from './services/CacheClient';
-import { RedisCacheAdapter } from './adapters/RedisCacheAdapter';
-import { stringifyJSON } from './util/functions/stringifyJSON';
+import { RedisCacheAdapter } from './application/adapters/RedisCacheAdapter';
+import { GetPublicGithubReposByUser } from './application/GetPublicGithubReposByUser';
+import { FetchAppGateway } from './infra/gateway/FetchAppGateway';
 
 config();
 
+const fetchAppGateway = new FetchAppGateway();
 const redisCacheAdapter = new RedisCacheAdapter();
-const cacheClient = new CacheClient(redisCacheAdapter);
 
-await cacheClient.connect();
+await redisCacheAdapter.connect();
 
-async function setCacheData() {
-  const resultData = await cacheClient.setCacheData(
-    'data_items:1',
-    stringifyJSON({
-      id: 1,
-      items: [
-        { id: randomUUID(), name: '01' },
-        { id: randomUUID(), name: '02' },
-        { id: randomUUID(), name: '03' },
-      ],
-    })
-  );
-  console.log('resultData', resultData);
-}
+const getPublicGithubReposByUser = new GetPublicGithubReposByUser({
+  appGateway: fetchAppGateway,
+  cacheAdapter: redisCacheAdapter,
+});
 
-async function getCacheData() {
-  const cacheData = await cacheClient.getCacheData('data_items:1');
-  console.log('cacheData', cacheData);
-}
-
-await setCacheData();
-await getCacheData();
+const githubUser = 'gsllucas';
+const reposByUser = await getPublicGithubReposByUser.execute(githubUser);
+console.log(reposByUser);
