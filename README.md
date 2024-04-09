@@ -12,6 +12,18 @@ By default, redis is set up with some default credentials, so when app is live f
 - Typescript 5.4.3
 - Node v20.12.0
 
+## Strategy Perfomance Comparison
+
+**Cache Strategy: 1ms**
+
+![Cache Milliseconds Perfomance](cache-strategy.png)
+
+**HTTP Strategy: 567ms**
+
+![HTTP Milliseconds Perfomance](http-strategy.png)
+
+> Cache aside strategy can be even more rewarding when applied into massive recurrent data
+
 ## Getting Started
 
 1. Install dependencies
