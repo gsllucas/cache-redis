@@ -1,6 +1,6 @@
 export interface CacheAdapter {
   connect(): Promise<void>;
   disconnect(): Promise<void>;
-  getCacheData(key: string): Promise<any>;
+  getCacheData<T>(key: string): Promise<T>;
   setCacheData(key: string, val: string): Promise<any>;
 }

@@ -1,17 +1,13 @@
 import { RedisClientType, createClient } from 'redis';
-import { CacheAdapter } from './interfaces/CacheAdapter';
-import RedisClient from '@redis/client/dist/lib/client';
+import { CacheAdapter } from '../../adapters/CacheAdapter';
 
 export class RedisCacheAdapter implements CacheAdapter {
   private redisClient: RedisClientType<any, any, any>;
 
+  constructor() {}
+
   async connect(): Promise<void> {
     const REDIS_HOST = process.env.REDIS_HOST ?? 'redis://localhost:6379';
-    console.log(
-      'process.env.REDISCLI_AUTH',
-      process.env.REDISCLI_AUTH,
-      process.env.REDIS_USER
-    );
     const client = createClient({
       url: REDIS_HOST,
       username: process.env.REDIS_USER,
