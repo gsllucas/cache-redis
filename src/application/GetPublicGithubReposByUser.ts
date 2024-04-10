@@ -1,21 +1,15 @@
-import { CacheAdapter } from '../adapters/CacheAdapter';
+import { CacheAdapter } from './adapters/CacheAdapter';
 import { stringifyJSON } from '../util/functions/stringifyJSON';
 import { RequestMeasurerHelper } from '../util/helpers/RequestMeasurerHelper';
 import { AppGateway } from './gateway/AppGateway';
 
-export class GetPublicGithubReposByUserOptions {
-  cacheAdapter: CacheAdapter;
-  appGateway: AppGateway;
-}
-
 export class GetPublicGithubReposByUser {
-  private appGateway: AppGateway;
-  private cacheAdapter: CacheAdapter;
   private requestMeasurer: RequestMeasurerHelper;
 
-  constructor({ appGateway, cacheAdapter }: GetPublicGithubReposByUserOptions) {
-    this.appGateway = appGateway;
-    this.cacheAdapter = cacheAdapter;
+  constructor(
+    private cacheAdapter: CacheAdapter,
+    private appGateway: AppGateway
+  ) {
     this.requestMeasurer = new RequestMeasurerHelper();
   }
 

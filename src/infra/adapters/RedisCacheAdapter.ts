@@ -1,5 +1,5 @@
 import { RedisClientType, createClient } from 'redis';
-import { CacheAdapter } from '../../adapters/CacheAdapter';
+import { CacheAdapter } from '../../application/adapters/CacheAdapter';
 
 export class RedisCacheAdapter implements CacheAdapter {
   private redisClient: RedisClientType<any, any, any>;

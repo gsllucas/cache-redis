@@ -1,5 +1,5 @@
 import { config } from 'dotenv';
-import { RedisCacheAdapter } from './application/adapters/RedisCacheAdapter';
+import { RedisCacheAdapter } from './infra/adapters/RedisCacheAdapter';
 import { GetPublicGithubReposByUser } from './application/GetPublicGithubReposByUser';
 import { FetchAppGateway } from './infra/gateway/FetchAppGateway';
 
@@ -10,11 +10,10 @@ const redisCacheAdapter = new RedisCacheAdapter();
 
 await redisCacheAdapter.connect();
 
-const getPublicGithubReposByUser = new GetPublicGithubReposByUser({
-  appGateway: fetchAppGateway,
-  cacheAdapter: redisCacheAdapter,
-});
+const getPublicGithubReposByUser = new GetPublicGithubReposByUser(
+  redisCacheAdapter,
+  fetchAppGateway
+);
 
-const githubUser = 'gsllucas';
-const reposByUser = await getPublicGithubReposByUser.execute(githubUser);
+const reposByUser = await getPublicGithubReposByUser.execute('gsllucas');
 console.log(reposByUser);
